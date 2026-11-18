@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>个人博客ww</title>
+
+
+<style>
+
+/* =========================
+   基础设置
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    background: #eeeeee;
+
+    color: #333333;
+
+    font-family:
+        Arial,
+        "Noto Sans SC",
+        sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   手机页面
+========================= */
+
+.page {
+
+    width: 100%;
+
+    max-width: 480px;
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    background: #f8f8f8;
+}
+
+
+/* =========================
+   Profile
+========================= */
+
+.profile {
+
+    position: relative;
+
+    height: 135px;
+
+    background-image:
+        url("background.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    border-bottom: 1px solid #ddd;
+}
+
+
+/* 背景遮罩 */
+
+.profile::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(255,255,255,0.25);
+}
+
+
+/* =========================
+   Profile 内容
+========================= */
+
+.profile-content {
+
+    position: absolute;
+
+    z-index: 2;
+
+    left: 18px;
+
+    bottom: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================
+   头像 + 挂件的容器
+========================= */
+
+.avatar-box {
+
+    position: relative;
+
+    /*
+       这里比实际头像稍微大一点，
+       给挂件留出溢出的空间
+    */
+
+    width: 60px;
+
+    height: 60px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   头像
+========================= */
+
+.avatar {
+
+    position: absolute;
+
+    left: 6px;
+
+    top: 6px;
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid white;
+
+    box-shadow:
+        0 1px 5px
+        rgba(0,0,0,0.15);
+
+    z-index: 1;
+}
+
+
+/* =========================
+   头像挂件
+========================= */
+
+/*
+   你的 PNG 放这里。
+
+   decoration.png 必须最好是
+   透明背景的 PNG。
+
+   这个图层会盖在头像上面，
+   并且允许超出头像范围。
+*/
+
+.avatar-decoration {
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    width: 60px;
+
+    height: 60px;
+
+    object-fit: contain;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   名字
+========================= */
+
+.profile-name {
+
+    background:
+        rgba(255,255,255,0.75);
+
+    padding:
+        3px 8px;
+
+    font-size: 13px;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================
+   导航
+========================= */
+
+.nav {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 22px;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #ddd;
+
+    background: #fafafa;
+}
+
+.nav a {
+
+    color: #666;
+
+    text-decoration: none;
+
+    font-size: 11px;
+}
+
+.nav a:hover {
+
+    color: #111;
+}
+
+
+/* =========================
+   内容
+========================= */
+
+.content {
+
+    padding:
+        18px 17px 50px;
+}
+
+
+/* =========================
+   帖子
+========================= */
+
+.post {
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #ddd;
+}
+
+
+/* 日期 */
+
+.date {
+
+    color: #999;
+
+    font-size: 10px;
+
+    margin-bottom: 6px;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* 标题 */
+
+.post-title {
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+
+    font-weight: normal;
+}
+
+
+/* 正文 */
+
+.post-text {
+
+    color: #444;
+
+    font-size: 11px;
+
+    white-space: pre-line;
+}
+
+
+/* =========================
+   帖子图片
+========================= */
+
+.post-image {
+
+    width: 100%;
+
+    display: block;
+
+    margin: 10px 0;
+
+    border-radius: 2px;
+
+    cursor: pointer;
+}
+
+
+/* 小图 */
+
+.post-image.small {
+
+    width: 65%;
+}
+
+
+/* =========================
+   Gallery
+========================= */
+
+.gallery {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 4px;
+}
+
+.gallery img {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   Profile 页面
+========================= */
+
+.about {
+
+    text-align: center;
+
+    padding: 15px 10px;
+}
+
+.about-avatar {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    margin-bottom: 6px;
+}
+
+.about-name {
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+}
+
+.about-text {
+
+    color: #777;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================
+   手机适配
+========================= */
+
+@media (max-width: 480px) {
+
+    .page {
+
+        min-height: 100vh;
+    }
+
+    .content {
+
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+}
+.nav a:not(:last-child)::after {
+    content: "♡";
+    margin-left: 22px;
+    color: #aaa;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================
+         PROFILE
+    ====================== -->
+
+    <header class="profile">
+
+
+        <div class="profile-content">
+
+
+            <!--
+                头像区域
+
+                avatar.jpg
+                = 你的头像
+
+                decoration.png
+                = 你的异形头像框/挂件
+            -->
+
+            <div class="avatar-box">
+
+
+                <!-- 头像 -->
+
+                <img
+                    class="avatar"
+                    src="avatar.jpg"
+                    alt="avatar"
+                >
+
+
+                <!--
+                    挂件
+
+                    把你自己的透明 PNG
+                    命名为 decoration.png
+                -->
+
+                <img
+                    class="avatar-decoration"
+                    src="decoration.png"
+                    alt=""
+                >
+
+
+            </div>
+
+
+            <!-- 名字 -->
+
+            <div class="profile-name">
+                ハルナ
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =====================
+         导航
+    ====================== -->
+
+    <nav class="nav">
+
+        <a href="#home">
+            ホーム
+        </a>
+
+        <a href="#diary">
+            日記
+        </a>
+
+        <a href="#gallery">
+            写真
+        </a>
+
+        <a href="#about">
+            プロフィール
+        </a>
+
+    </nav>
+
+
+
+    <!-- =====================
+         内容
+    ====================== -->
+
+    <main class="content">
+        
+        <section id="diary"><!-- 置顶 --><article class="post pinned"><div class="post-date"> PINNED</div><h2>お知らせ</h2><p>同推拒否！！<br>
+        我有都築京介认可梦</p></p></article>
+
+
+        <!-- 第一篇 -->
+
+        <article
+            class="post"
+            id="diary"
+        >
+
+            <div class="date">
+                2026.08.08
+            </div>
+
+
+            <div class="post-title">
+                ::>_<::
+            </div>
+
+
+            <div class="post-text">
+分享野生三十/xxxmiracle的单曲《失爱招领》: https://163cn.tv/bcHck8YL (来自@网易云音乐)<br>
+我是 胆小鬼 那一种
+喜欢卑鄙的逃避责任
+烦人的 那一种
+是你心里最讨厌的人
+            </div>
+
+
+        </article>
+
+
+
+        
+
+
+
+
+        <!-- =====================
+             Gallery
+        ====================== -->
+
+        <section
+            class="post"
+            id="gallery"        >
+
+
+            <div class="post-title">
+                写真
+            </div>
+
+
+            <div class="gallery">
+
+
+                <img
+                    src="taiga1.jpg"
+                    alt=""
+                >
+
+                <img
+                    src="taiga2.jpg"
+                    alt=""
+                >
+
+                <img
+                    src="taiga3.jpg"
+                    alt=""
+                >
+
+                <img
+                    src="taiga4.jpg"
+                    alt=""
+                >
+
+                <img
+                    src="taiga5.jpg"
+                    alt=""
+                >
+
+                <img
+                    src="taiga6.jpg"
+                    alt=""
+                >
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================
+             About
+        ====================== -->
+
+        <section
+            class="post"
+            id="about"
+        >
+
+
+            <div class="about">
+
+
+                <img
+                    class="about-avatar"
+                    src="avatar.jpg"
+                    alt=""
+                >
+
+
+                <div class="about-name">
+                    x@luvsic_11
+                 
+                </div>
+
+
+                <div class="about-text">
+
+                    彼氏@都築誠<br/>
+
+                    推し@taiga_himuro@taiganyaa
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>
