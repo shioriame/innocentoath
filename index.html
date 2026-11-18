@@ -273,99 +273,6 @@ body {
 
 </style>
 
-<style>
-:root {
-  --bg: #fff;
-  --text: #222;
-  --card: #f8f8f8;
-  --border: #ddd;
-  --muted: #888;
-}
-
-[data-theme="dark"] {
-  --bg: #121212;
-  --text: #e8e8e8;
-  --card: #1e1e1e;
-  --border: #333;
-  --muted: #aaa;
-}
-
-
-body {
-  background: var(--bg) !important;
-  color: var(--text) !important;
-  transition: background 0.3s, color 0.3s;
-}
-
-.post, .gallery, .header, .card {
-  background: var(--card) !important;
-  border-color: var(--border) !important;
-}
-
-.post-tip, .muted, .date {
-  color: var(--muted) !important;
-}
-
-#theme-toggle {
-  position: fixed;
-  top: 80px;
-  right: 16px;
-  z-index: 99999;
-  background: #2a2a2a;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 18px;
-  cursor: pointer;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,.3);}
-
-/* 暗色模式整体轻暗 */
-[data-theme="dark"] body,
-[data-theme="dark"] .header,
-[data-theme="dark"] nav,
-[data-theme="dark"] .navbar {
-  background: #161616 !important;
-  color: #e8e8e8 !important;
-}
-[data-theme="dark"] nav a,
-[data-theme="dark"] .navbar a {
-  color: #e8e8e8 !important;
-}
-/* 横幅只压一点亮度，不强行混色 */
-[data-theme="dark"] .banner img,
-[data-theme="dark"] .header img,
-[data-theme="dark"] .cover img {
-  filter: brightness(.82) grayscale(.15);
-}
-[data-theme="dark"] .banner {
-  background-color: #1a1a1a !important;
-}
-/* 正文对比度 */
-[data-theme="dark"] .post p,
-[data-theme="dark"] .content p {
-  color: #e0e0e0 !important;
-}
-/* 按钮收小、半透明、不抢戏 */
-#theme-toggle {
-  position: fixed;
-  top: 78px;
-  right: 14px;
-  z-index: 99999;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.25);
-  background: rgba(20,20,20,.85);
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-}
-
-
-</style>
 
 
 </head>
@@ -577,29 +484,6 @@ fetch(`https://api.github.com/repos/${REPO}/contents/gallery`)
   });
 </script>
 
-<button id="theme-toggle">🌙</button>
-
-<script>
-  const toggle = document.getElementById('theme-toggle');
-  const saved = localStorage.getItem('theme');
-  if (saved === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    toggle.textContent = '☀️';
-  }
-
-  toggle.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('theme', 'light');
-      toggle.textContent = '🌙';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-      toggle.textContent = '☀️';
-    }
-  });
-</script>
 
 
 </body>
