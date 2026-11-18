@@ -322,6 +322,49 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,.3);
 }
 
+/* 顶部横幅与导航暗色适配 */
+[data-theme="dark"] .header,
+[data-theme="dark"] .banner,
+[data-theme="dark"] nav,
+[data-theme="dark"] .navbar {
+  background: #1e1e1e !important;
+  color: #e8e8e8 !important;
+}
+[data-theme="dark"] .nav a,
+[data-theme="dark"] nav a {
+  color: #e8e8e8 !important;
+}
+/* 正文提升对比度 */
+[data-theme="dark"] .post,
+[data-theme="dark"] .post p,
+[data-theme="dark"] .content {
+  color: #ededed !important;
+}
+[data-theme="dark"] .post-tip,
+[data-theme="dark"] .muted,
+[data-theme="dark"] .date {
+  color: #bdbdbd !important;
+}
+/* 按钮微调位置 */
+#theme-toggle {
+  top: 76px;
+  right: 14px;
+}
+
+/* 顶部横幅整体压暗统一 */
+[data-theme="dark"] .banner,
+[data-theme="dark"] .header-img,
+[data-theme="dark"] .cover,
+[data-theme="dark"] .hero {
+  filter: brightness(.72) saturate(.85);
+}
+/* 横幅上的文字/昵称提亮 */
+[data-theme="dark"] .banner *,
+[data-theme="dark"] .header * {
+  color: #e8e8e8 !important;
+}
+
+
 </style>
 
 
