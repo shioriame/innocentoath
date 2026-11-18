@@ -436,6 +436,59 @@ fetch(`https://api.github.com/repos/${REPO}/contents/gallery`)
 
 </script>
 
+<!-- 音乐播放器 + 旋转唱片 -->
+<audio id="bgm" loop preload="auto">
+  <source src="music/bgm.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 唱片 -->
+<div id="disc"
+  style="position:fixed;right:14px;bottom:52px;z-index:999;
+         width:48px;height:48px;border-radius:50%;
+         background:radial-gradient(circle,#222 30%,#111 31%,#111 38%,#333 39%,#333 45%,#222 46%);
+         border:2px solid #555;display:none;align-items:center;justify-content:center;
+         animation:spin 3s linear infinite;animation-play-state:paused;">
+  <div style="width:14px;height:14px;border-radius:50%;background:#f0c040;"></div>
+</div>
+
+<!-- 按钮 -->
+<button id="music-btn"
+  style="position:fixed;right:14px;bottom:18px;z-index:999;
+         background:rgba(255,255,255,0.85);border:1px solid #ddd;
+         border-radius:20px;padding:6px 12px;font-size:11px;cursor:pointer;">
+  ♫ 音乐
+</button>
+
+<style>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+</style>
+
+<script>
+  const bgm = document.getElementById('bgm');
+  const btn = document.getElementById('music-btn');
+  const disc = document.getElementById('disc');
+  bgm.volume = 0.4;
+
+  btn.addEventListener('click', () => {
+    if (bgm.paused) {
+      bgm.play().catch(() => {
+        btn.textContent = '♫ 再点一下';
+      });
+      btn.textContent = '♫ 暂停';
+      disc.style.display = 'flex';
+      disc.style.animationPlayState = 'running';
+    } else {
+      bgm.pause();
+      btn.textContent = '♫ 音乐';
+      disc.style.animationPlayState = 'paused';
+      disc.style.display = 'none';
+    }
+  });
+</script>
+
 
 </body>
 
